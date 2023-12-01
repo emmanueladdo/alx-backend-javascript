@@ -10,7 +10,7 @@ export default class Currency {
   }
 
   set code(CodeVal) {
-    this.code = CodeVal;
+    this._code = CodeVal;
   }
 
   get name() {

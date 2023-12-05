@@ -1,2 +1,2 @@
-This projects demostrates data manipulation in ES6-javascrpt
+Project that conatains the ES6 manipulation.
 

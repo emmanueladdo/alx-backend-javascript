@@ -1,1 +1,2 @@
-This is for node JS basic project 
+Project that conatains the ES6 manipulation.
+

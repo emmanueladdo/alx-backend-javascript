@@ -3,11 +3,11 @@
  */
 
 const http = require('http');
-
-const port = 1245;
 const fs = require('fs');
 
 const path = process.argv[2];
+
+const port = 1245;
 
 const countStudents = (path) => {
   const promise = (res, rej) => {

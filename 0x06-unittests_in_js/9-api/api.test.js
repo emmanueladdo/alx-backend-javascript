@@ -27,7 +27,8 @@ describe('index Page', () => {
     });
   });
 });
-describe('Cart Page', () => {
+
+describe('cart Page', () => {
   it('should have correst Status Code with num id param', () => {
     request('http://localhost:7865', (error, res, body) => {
       expect(res.statusCode).to.equal(200);
@@ -46,19 +47,19 @@ describe('Cart Page', () => {
     });
   });
 
-  it('return the correct content-type given valid id parameter', () => {
+  it('should return the correct content-type given valid id parameter', () => {
     request('http://localhost:7865/cart/12', (error, res, body) => {
       expect(res.headers['content-type']).to.equal('text/html; charset=utf-8');
     });
   });
 
-  it('return the correct content in the body when non number id is provided', () => {
+  it('should return the correct content in the body when non number id is provided', () => {
     request('http://localhost:7865/cart/hello', (error, res, body) => {
       expect(body).to.contain('Cannot GET /cart/hello');
     });
   });
 
-  it('return correct content length', () => {
+  it('should return the correct content length', () => {
     request('http://localhost:7865/cart/12', (error, res, body) => {
       expect(res.headers['content-length']).to.equal('27');
     });

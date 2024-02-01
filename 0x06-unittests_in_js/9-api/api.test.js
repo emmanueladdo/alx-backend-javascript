@@ -1,67 +1,135 @@
 // Scrits to test API
-const { expect } = require('chai');
 const request = require('request');
+const { expect } = require('chai');
 
-describe('index Page', () => {
-  it('should respond with the correct status code', () => {
-    request('http://localhost:7865', (error, res, body) => {
-      expect(res.statusCode).to.equal(200);
-    });
+describe('integration Testing', () => {
+  describe('gET /', () => {
+    it('code: 200 | Body: Welcome to the payment system', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(200);
+        expect(body).to.equal('Welcome to the payment system');
+        done();
+      });
+    }));
   });
 
-  it('should have the correct content of the body', () => {
-    request('http://localhost:7865', (error, res, body) => {
-      expect(body).to.contain('Welcome to the payment system');
-    });
+  describe('gET /cart/12', () => {
+    it('responds with 200 and id 12 in msg', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/12',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(200);
+        expect(body).to.equal('Payment methods for cart 12');
+        done();
+      });
+    }));
   });
 
-  it('should have the corrent Content-Type', () => {
-    request('http://localhost:7865', (error, res, body) => {
-      expect(res.headers['content-type']).to.equal('text/html; charset=utf-8');
-    });
+  describe('gET /cart/1', () => {
+    it('responds with 200 and id 1 in msg', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/1',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(200);
+        expect(body).to.equal('Payment methods for cart 1');
+        done();
+      });
+    }));
   });
 
-  it('should have the corrent Content-Length', () => {
-    request('http://localhost:7865', (error, res, body) => {
-      expect(res.headers['content-length']).to.equal('29');
-    });
-  });
-});
+  describe('gET /cart/123', () => {
+    it('responds with 200 and id 12 in msg', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/123',
+        method: 'GET',
+      };
 
-describe('cart Page', () => {
-  it('should have correst Status Code with num id param', () => {
-    request('http://localhost:7865', (error, res, body) => {
-      expect(res.statusCode).to.equal(200);
-    });
-  });
-
-  it('should have the correct result with number id parameter', () => {
-    request('http://localhost:7865/cart/12', (error, res, body) => {
-      expect(body).to.contain('Payment methods for cart 12');
-    });
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(200);
+        expect(body).to.equal('Payment methods for cart 123');
+        done();
+      });
+    }));
   });
 
-  it('should have the correct status code when non number id parameter is provided', () => {
-    request('http://localhost:7865/cart/hello', (error, res, body) => {
-      expect(res.statusCode).to.equal(404);
-    });
+  describe('gET /cart/a12', () => {
+    it('responds with 404', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/a12',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
+    }));
   });
 
-  it('should return the correct content-type given valid id parameter', () => {
-    request('http://localhost:7865/cart/12', (error, res, body) => {
-      expect(res.headers['content-type']).to.equal('text/html; charset=utf-8');
-    });
+  describe('gET /cart/a12b', () => {
+    it('responds with 404', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/a12b',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
+    }));
   });
 
-  it('should return the correct content in the body when non number id is provided', () => {
-    request('http://localhost:7865/cart/hello', (error, res, body) => {
-      expect(body).to.contain('Cannot GET /cart/hello');
-    });
+  describe('gET /cart/12b', () => {
+    it('responds with 404', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/12b',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
+    }));
   });
 
-  it('should return the correct content length', () => {
-    request('http://localhost:7865/cart/12', (error, res, body) => {
-      expect(res.headers['content-length']).to.equal('27');
-    });
+  describe('gET /cart/hello', () => {
+    it('responds with 404', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/hello',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
+    }));
+  });
+
+  describe('gET /cart/', () => {
+    it('responds with 404', () => new Promise((done) => {
+      const options = {
+        url: 'http://localhost:7865/cart/',
+        method: 'GET',
+      };
+
+      request(options, (error, response, body) => {
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
+    }));
   });
 });

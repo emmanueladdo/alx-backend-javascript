@@ -1,1 +1,1 @@
-This for the project of unitests
+This is for the project of the JS unitests

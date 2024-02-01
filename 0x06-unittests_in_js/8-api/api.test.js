@@ -1,8 +1,8 @@
-//Scrits to test API
+// Scrits to test API
 const { expect } = require('chai');
 const request = require('request');
 
-describe('Index Page', () => {
+describe('index Page', () => {
   it('should respond with the correct status code', () => {
     request('http://localhost:7865', (error, res, body) => {
       expect(res.statusCode).to.equal(200);
